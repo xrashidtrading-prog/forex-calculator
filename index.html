@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forex Risk Calculator</title>
+<style>
+body{
+background:#0e1117;
+color:white;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+.card{
+background:#111;
+padding:30px;
+border-radius:12px;
+width:320px;
+}
+input{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:none;
+border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Forex Risk Calculator</h2>
+
+<label>Account Size ($)</label>
+<input id="balance" type="number">
+
+<label>Risk %</label>
+<input id="risk" type="number">
+
+<label>Stop Loss (pips)</label>
+<input id="sl" type="number">
+
+<div id="result"></div>
+</div>
+
+<script>
+function calc(){
+let balance=document.getElementById("balance").value;
+let risk=document.getElementById("risk").value/100;
+let sl=document.getElementById("sl").value;
+
+if(balance && risk && sl){
+let maxLoss=balance*risk;
+let lot=maxLoss/(sl*10);
+document.getElementById("result").innerHTML=
+"<br>Lot Size: "+lot.toFixed(2)+" lots<br>Max Loss: $"+maxLoss.toFixed(2);
+}
+}
+
+document.querySelectorAll("input").forEach(i=>{
+i.addEventListener("input",calc);
+});
+</script>
+
+</body>
+</html>
